@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>化学元素消消乐 - 趣味学习元素周期表</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-decorations">
+    <div class="bubble-blob blob-1"></div>
+    <div class="bubble-blob blob-2"></div>
+    <div class="bubble-blob blob-3"></div>
+  </div>
+
+  <main class="game-container">
+    <!-- 头部标题与图例 -->
+    <header class="game-header">
+      <div class="title-wrap">
+        <span class="badge">🧪 趣味化学实验室</span>
+        <h1 class="game-title">化学元素消消乐</h1>
+      </div>
+      <div class="legend-bar">
+        <span class="legend-item"><span class="color-dot dot-symbol"></span>浅绿：元素符号</span>
+        <span class="legend-item"><span class="color-dot dot-name"></span>浅蓝：元素名称</span>
+      </div>
+    </header>
+
+    <!-- 控制看板：倒计时、得分、模式选项、开始按键 -->
+    <section class="dashboard-panel">
+      <!-- 倒计时 -->
+      <div class="panel-card timer-card">
+        <div class="card-icon">⏱️</div>
+        <div class="card-info">
+          <span class="card-label">剩余时间</span>
+          <span class="card-value" id="timerValue">120<span class="card-unit">秒</span></span>
+        </div>
+      </div>
+
+      <!-- 得分展示 -->
+      <div class="panel-card score-card">
+        <div class="card-icon">⭐</div>
+        <div class="card-info">
+          <span class="card-label">当前得分</span>
+          <span class="card-value" id="scoreValue">0<span class="card-unit">分</span></span>
+        </div>
+      </div>
+
+      <!-- 选项：常见化学元素（前40号）选项紧挨在得分旁边 -->
+      <div class="panel-card mode-select-card">
+        <div class="card-icon">🔬</div>
+        <div class="card-info">
+          <span class="card-label">元素范围</span>
+          <label class="toggle-container" title="勾选后元素范围扩展为周期表前40号元素">
+            <input type="checkbox" id="elementRangeCheckbox">
+            <span class="toggle-slider"></span>
+            <span class="toggle-text" id="toggleLabel">常见化学元素(前40号)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 操作按键：开始游戏 / 重新开始 -->
+      <div class="action-buttons">
+        <button id="startBtn" class="btn btn-primary">
+          <span class="btn-icon" id="startBtnIcon">▶</span>
+          <span id="startBtnText">开始游戏</span>
+        </button>
+        <button id="resetBtn" class="btn btn-secondary" title="重新发牌">
+          <span class="btn-icon">🔄</span>
+          <span>重置</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 游戏主区域：4行 × 5列 = 20个小球 -->
+    <section class="board-wrapper">
+      <div id="gameBoard" class="game-board">
+        <!-- 由 JS 动态渲染 20 个球体槽位 -->
+      </div>
+
+      <!-- 未开始遮罩层 -->
+      <div id="startOverlay" class="board-overlay">
+        <div class="overlay-content">
+          <div class="overlay-icon">⚗️</div>
+          <h2>准备好挑战了吗？</h2>
+          <p>限时 120 秒，点击匹配「元素符号」与「对应中文名称」消除小球！</p>
+          <button id="overlayStartBtn" class="btn btn-large btn-primary">立即开始</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 底部状态指示栏 -->
+    <footer class="game-footer">
+      <div class="stats-bar">
+        <span>当前第 <strong id="roundIndex">1</strong> 轮</span>
+        <span class="divider">|</span>
+        <span>已消除 <strong id="matchedPairsCount">0</strong> / 10 对</span>
+        <span class="divider">|</span>
+        <span id="comboIndicator" class="combo-text">准备就绪</span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- 游戏结束结算弹窗 -->
+  <div id="resultModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-trophy">🏆</div>
+      <h2 class="modal-title">时间到！挑战完成</h2>
+      <div class="modal-stats">
+        <div class="modal-stat-item">
+          <span class="stat-num" id="finalScore">0</span>
+          <span class="stat-title">最终得分</span>
+        </div>
+        <div class="modal-stat-item">
+          <span class="stat-num" id="finalMatched">0</span>
+          <span class="stat-title">消除对数</span>
+        </div>
+        <div class="modal-stat-item">
+          <span class="stat-num" id="finalAccuracy">100%</span>
+          <span class="stat-title">准确率</span>
+        </div>
+      </div>
+      <p class="modal-evaluation" id="evaluationText">极佳的化学知识敏锐度！</p>
+      <div class="modal-actions">
+        <button id="modalRestartBtn" class="btn btn-primary btn-large">再来一局</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
