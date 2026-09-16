@@ -2,6 +2,8 @@
 
 一款基于 HTML5 + CSS3 + Vanilla JavaScript 制作的趣味化学元素消除网页小游戏。
 
+🌐 **在线试玩地址**：[https://aktifin.github.io/MyGame/](https://aktifin.github.io/MyGame/)
+
 ## 🌟 核心特色与玩法
 
 - **4 × 5 经典网格**：每排 5 个小球，共 4 行，每次展示 10 对化学元素（10 个元素名称球 + 10 个元素符号球）。
